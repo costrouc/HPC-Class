@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pdflatex hw1.tex
+
+evince hw1.pdf

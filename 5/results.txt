@@ -1,0 +1,29 @@
+rm -f data/*
+make -C src/ clean
+make[1]: Entering directory `/global/u1/c/costrouc/class/cs594/hw/5/src'
+rm -f hw5.o hw5
+make[1]: Leaving directory `/global/u1/c/costrouc/class/cs594/hw/5/src'
+make -C src/	
+make[1]: Entering directory `/global/u1/c/costrouc/class/cs594/hw/5/src'
+cc -c hw5.c -o hw5.o -mkl
+cc  hw5.o -o hw5 -lpapi -mkl
+make[1]: Leaving directory `/global/u1/c/costrouc/class/cs594/hw/5/src'
+./util/download-mat.sh
+Converting to CRS format
+Converting to CCS format
+Converting to CRS format
+Converting to CCS format
+./src/hw5 CRS 1 data/matrix.output.crs 
+M	N	Num Non Zeros	Real_Time [s]	Proc_Time [s]	FLOPS	MFLOPS
+25980	25980	1020714	-nan	4.705729e-03	2041428	433.817627
+Norm difference between matricies 0.000000
+./src/hw5 CCS 1 data/matrix.output.ccs
+M	N	Num Non Zeros	Real_Time [s]	Proc_Time [s]	FLOPS	MFLOPS
+25980	25980	1020714	-nan	6.343064e-03	2041362	321.825867
+./src/hw5 CRS 1 data/matrix.reorder.crs 
+M	N	Num Non Zeros	Real_Time [s]	Proc_Time [s]	FLOPS	MFLOPS
+25980	25980	1020714	-nan	5.335568e-03	2041428	382.607422
+Norm difference between matricies 0.000000
+./src/hw5 CCS 1 data/matrix.reorder.ccs
+M	N	Num Non Zeros	Real_Time [s]	Proc_Time [s]	FLOPS	MFLOPS
+25980	25980	1020714	-nan	6.470970e-03	2041362	315.464600

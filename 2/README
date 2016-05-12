@@ -1,0 +1,56 @@
+CS 596 - Homework Assignment #2
+All code and documentation was written by Chris Ostrouchov (costrouc@utk.edu)
+
+REQUIREMENTS
+=============
+(c)BLAS / LAPACK(E) - My homework assignment uses BLAS and LAPACKE to check the correctness of each each problem (2-norm, matrix-vector multiply, matrix-matrix multiply). LAPACK documents how to mesure error [http://www.netlib.org/lapack/lug/node75.html]. We use relative error with the 2-norm and Frobenius Norm.
+PAPI - A library maintained by UTK. I use PAPI for timing, counting of flips, and flops/sec. It has been a great learning experience using this library
+OpenMP - an OpenMP capable compiler along with header and library. The homeowrk assignment was to write a shared memory parallel code
+
+INSTALL
+=============
+To install simple use the make command
+
+      make
+
+EXECUTABLE
+=============
+Usage
+	./hw2 <min_size> <max_size>
+
+By running the command with <min_size> and <max_size> the program will do the following:
+
+ - Calculate matrix-vector product for random matrices with values uniformly distributed between the closed interval [0.0 - 1.0] (work is shared between all available cores)
+ - Verify each matrix-matrix product for random matrices with BLAS Level 2 implementation (cblas_dgemm)
+ - Measure relative error of two matricies with Frobenius Norm. 
+
+ - Calculate Lower Triangular solve matrix with random matricies with values uniformly distributed between the closed interval [0.0 - 1.0](work is shared between all available cores)
+ - Verify each matrix-matrix product for random matrices with BLAS Level 2 implementation (cblas_dtrsm)
+ - Measure relative error of two matricies with Frobenius Norm.   
+
+Memory usage:
+BEWARE OF LARGE <max_size> input. Memory usage scales as (max_size * max_size * 2 * 8) bytes.
+
+TESTING
+=============
+make test
+
+runs the test asked for in the homework 1 - 1000.
+
+FOLDERS
+=============
+src - contains source files
+utils - contains python script to plot data created from ./hw1
+doc - where homework document is written
+data - where data from ./hw2 executable is written to
+img - where images from plot.py (make plot) is stored
+
+MAKE COMMANDS
+=============
+make - install executable
+make test - run tests (takes around 15 minutes)
+make plot - create plots from data
+make clean - clean src directory and executable
+make clean_data - clean data and images produced by running the executable
+make purge - clean folders of backups
+make release - tarball folder

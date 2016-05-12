@@ -1,0 +1,56 @@
+CS 596 - Homework Assignment #1
+All code and documentation was written by Chris Ostrouchov (costrouc@utk.edu)
+
+REQUIREMENTS
+=============
+cBLAS - My homework assignment uses BLAS to check the correctness of each each problem (2-norm, matrix-vector multiply, matrix-matrix multiply)
+PAPI - A library maintained by UTK. I use PAPI for timing, counting of flips, and flops/sec. It has been a great learning experience using this library
+
+INSTALL
+=============
+To install simple use the make command
+
+      make
+
+EXECUTABLE
+=============
+Usage
+	./hw1 <min_size> <max_size>
+
+By running the command with <min_size> and <max_size> the program will do the following:
+
+ - Calculate 2-norm for random vectors with values uniformly distributed between the closed interval [0.0 - 1.0]
+ - Verify each 2-norm for random vectors with BLAS Level 1 implementation
+
+ - Calculate matrix-vector product for random vector and matrix with values uniformly distributed between the closed interval [0.0 - 1.0]
+ - Verify each matrix-vector product for random vector and matrix with BLAS Level 2 implementation
+
+ - Calculate matrix-vector product for random matrices with values uniformly distributed between the closed interval [0.0 - 1.0]
+ - Verify each matrix-matrix product for random matrices with BLAS Level 2 implementation
+
+Memory usage:
+BEWARE OF LARGE <max_size> input. Memory usage scales as (max_size * max_size * 2 * 8) bytes.
+
+TESTING
+=============
+make test
+
+runs the test asked for in the homework 1 - 1000.
+
+FOLDERS
+=============
+src - contains source files
+utils - contains python script to plot data created from ./hw1
+doc - where homework document is written
+data - where data from ./hw1 executable is written to
+img - where images from plot.py (make plot) is stored
+
+MAKE COMMANDS
+=============
+make - install executable
+make test - run tests (takes around 15 minutes)
+make plot - create plots from data
+make clean - clean src directory and executable
+make clean_data - clean data and images produced by running the executable
+make purge - clean folders of backups
+make release - tarball folder

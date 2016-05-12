@@ -1,0 +1,8 @@
+<h1 id="introduction">Introduction</h1>
+<p>Matrix Multiplication is one of the most studied and researched problems in High Performane Computing. It is unique in that a simple serial version of Matrix Multiplication is only 4 lines of code yet it's performace will be substantially less (20X) from a well writen algorithm for a single core. For these serail algorithms to be fast they must take advantage of memory reuse and special vector opperations (AVX) available from Intel.</p>
+<pre><code>for (int i=0; i&lt;m; i++)
+    for (int j=0; j&lt;n; j++)
+        for (int k=0; k&lt;l; k++)
+            C[m,n] = C[m,n] + A[m,k]*B[k,n];</code></pre>
+<p>Matrix multiplication is a commonly found in BLAS Level 3 as {s,d,z,c}gemm. However there are severe limitations to serial implementations of matrix multiplication as you are limited to dense matricies in size around 1000-10000. Pararalel matrix multiplication solves this problem but also introduces problems that had little effect in serial programming. There are many classical parallel implemenations. Two popular algorithms are the (Scalable Universal Matrix Multiplication Algorithm) SUMMA and PUMMA. Both of these algorithms send broadcasts throughout either a whole row or column, becoming the dominant bottleneck in these algorithms.</p>
+<h2 id="strassens-algorithm">Strassen's Algorithm</h2>

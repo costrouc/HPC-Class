@@ -1,0 +1,54 @@
+CS 596 - Homework Assignment #4
+All code and documentation was written by Chris Ostrouchov (costrouc@utk.edu)
+
+Mini-Project PETSc
+=============
+See petsc directory for code that was run on my computer (requires petsc appropriate setup)
+
+data directory has a file with my results (ex2_test.txt)
+
+plots results can be found in the pdf
+
+REQUIREMENTS
+=============
+(cu)BLAS / LAPACK(E) - My homework assignment uses BLAS to check the correctness . LAPACK documents how to mesure error [http://www.netlib.org/lapack/lug/node75.html]. We use the Frobenius Norm.
+PAPI - A library maintained by UTK. I use PAPI for timing, counting of flips, and flops/sec. It has been a great learning experience using this library
+
+INSTALL
+=============
+To install simple use the make command
+
+      make
+
+EXECUTABLE
+=============
+Usage
+	./hw4
+
+By running the command the program will do the following:
+
+ - Calculate the Cholesky QR factorization of an m by n matrix A using a hybrid gpu approach
+ - Verify each QR factorization by testing norm(I-Q'Q ) and norm(A-AR)
+
+Memory Usage (yeah i didn't optimize)
+~O(7n^2)
+ 
+TESTING
+=============
+make test
+
+runs the test asked for in the homework with matricies of size 1000\32 2000\32 3000\32
+
+FOLDERS
+=============
+src - contains source files
+doc - where homework document is written
+data - where example data from my ./hw4 executable  
+
+MAKE COMMANDS
+=============
+make - compile executable
+make test - run tests (takes around 15 minutes)
+make clean - clean src directory and executable
+make purge - clean folders of backups
+make release - tarball folder

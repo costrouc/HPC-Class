@@ -1,0 +1,7 @@
+CC=gcc
+CFLAGS=-c -Wall -O3
+LDFLAGS=
+
+MAKE_DIR = $(PWD)
+SOURCE_DIR = $(MAKE_DIR)/src
+

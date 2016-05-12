@@ -1,0 +1,140 @@
+<h1 id="problem-1---compute-rates">Problem 1 - Compute rates</h1>
+<p>For my analysis I used the hpctoolkit compiled with the ability to use the PAPI toolkit. I compiled hpctoolkit and papi for each cluster I tried. I was disappointed that on all the machines I tried were unable to supply the PAPI_LST_INS event. Thus I was unable to collect the statistic LPC. I tried the machine hopper and edison clusters at NERSC along with my own machine/cluster. All metrics were calculated using the exclusive statistics. Results and hpctoolkit databases can be found for each run in the test folder. FPC was calculated as exclusive Floating point instructions divided by total number of cycles. IPC was calculated as exclusive instructions divided by total number of cycles. A sampling rate of 100000 was used for each event PAPI_FP_INS, PAPI_TOT_INS, PAPI_LST_INS, PAPI_TOT_CYC. To look at the results closer consult the directory <code>test/1result/1/</code>. Each run was done using a bash script found in <code>test/</code>. Results are automatically generated in [123]result.</p>
+<h2 id="papi_component_avail">Papi_component_avail</h2>
+<h2 id="available-components-and-hardware-information.">Available components and hardware information.</h2>
+<p>PAPI Version : 5.3.0.0<br />Vendor string and code : GenuineIntel (1)<br />Model string and code : Intel(R) Core(TM) i5-3570K CPU @ 3.40GHz (58)<br />CPU Revision : 9.000000<br />CPUID Info : Family: 6 Model: 58 Stepping: 9<br />CPU Max Megahertz : 3401<br />CPU Min Megahertz : 1600<br />Hdw Threads per core : 1<br />Cores per Socket : 4<br />Sockets : 1<br />NUMA Nodes : 1<br />CPUs per Node : 4<br />Total CPUs : 4<br />Running in a VM : no<br />Number Hardware Counters : 11<br />Max Multiplex Counters : 64<br />--------------------------------------------------------------------------------</p>
+<p>Compiled-in components:<br />Name: perf_event Linux perf_event CPU counters<br />Name: perf_event_uncore Linux perf_event CPU uncore and northbridge<br /> -&gt; Disabled: Insufficient permissions for uncore access. Set /proc/sys/kernel/perf_event_paranoid to 0 or run as root.</p>
+<p>Active components:<br />Name: perf_event Linux perf_event CPU counters<br /> Native: 161, Preset: 50, Counters: 11</p>
+<hr />
+<p>component.c PASSED</p>
+<h2 id="results">Results</h2>
+<p>Below you will see the top 6 most time consuming routines</p>
+<table>
+<col width="16%" />
+<col width="8%" />
+<col width="8%" />
+<col width="11%" />
+<tbody>
+<tr class="odd">
+<td align="left"><p>Function</p></td>
+<td align="left"><p>FPC</p></td>
+<td align="left"><p>IPC</p></td>
+<td align="left"><p>Total Cycles</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>binvcrhs</p></td>
+<td align="left"><p>0.812</p></td>
+<td align="left"><p>2.4</p></td>
+<td align="left"><p>2.52e11</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>y_solve_</p></td>
+<td align="left"><p>0.459</p></td>
+<td align="left"><p>1.22</p></td>
+<td align="left"><p>4.77e10</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>z_solve_</p></td>
+<td align="left"><p>0.464</p></td>
+<td align="left"><p>1.3</p></td>
+<td align="left"><p>4.53e10</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>x_solve_</p></td>
+<td align="left"><p>0.651</p></td>
+<td align="left"><p>1.77</p></td>
+<td align="left"><p>3.25e10</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>compute_rhs</p></td>
+<td align="left"><p>0.519</p></td>
+<td align="left"><p>1.53</p></td>
+<td align="left"><p>3.03e10</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>matmul_sub</p></td>
+<td align="left"><p>0.86</p></td>
+<td align="left"><p>2.55</p></td>
+<td align="left"><p>2.93e10</p></td>
+</tr>
+</tbody>
+</table>
+<h1 id="problem-2---scaling-efficiency">Problem 2 - Scaling Efficiency</h1>
+<table>
+<col width="9%" />
+<col width="12%" />
+<tbody>
+<tr class="odd">
+<td align="left"><p>Number Cores</p></td>
+<td align="left"><p>Mop/s total</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>1</p></td>
+<td align="left"><p>2799.34</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>2</p></td>
+<td align="left"><p>4925.71</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>4</p></td>
+<td align="left"><p>9653.68</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>8</p></td>
+<td align="left"><p>19147.88</p></td>
+</tr>
+</tbody>
+</table>
+<p>Not surprisingly the algorithms does not perfectly scale with the number of openmp cores used. The performace decreases as the number of cores increses.</p>
+<div class="figure">
+<img src="../test/2result/scaling.png" alt="Algorithm scaling" /><p class="caption">Algorithm scaling</p>
+</div>
+<h1 id="problem-3---differential-analysis">Problem 3 - Differential Analysis</h1>
+<p>Here are results for the total number of cycles for the whole program and select cycles. See /test/3result/ for detailed data on the runs.</p>
+<table>
+<col width="12%" />
+<col width="12%" />
+<tbody>
+<tr class="odd">
+<td align="left"><p>Function</p></td>
+<td align="left"><p>Total Cycles</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>2 Cores</p></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Total</p></td>
+<td align="left"><p>1.83e11</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>binvcrhs</p></td>
+<td align="left"><p>4.48e10</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>z_solve_</p></td>
+<td align="left"><p>2.87e10</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>4 Cores</p></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>Total</p></td>
+<td align="left"><p>1.83e11</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>binvcrhs</p></td>
+<td align="left"><p>4.49e10</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p>z_solve_</p></td>
+<td align="left"><p>2.87e10</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p>y_solve</p></td>
+<td align="left"><p>2.80e10</p></td>
+</tr>
+</tbody>
+</table>

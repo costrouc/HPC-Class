@@ -1,0 +1,7 @@
+% Communication Optimal Parallel Strassen Multiplication
+% Chris Ostrouchov
+% 5/03/2013
+
+# Introduction
+
+Matrix Multiplication is one of the most studied problems in High Performane Computing. CS 594 was no exception in which we had 4 projects involving matrix multiply.
